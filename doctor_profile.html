@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Doctor Profile</title>
+</head>
+<body>
+    <h2>Doctor Profile</h2>
+
+    <form id="profileForm">
+        <label>Specialty:</label><br>
+        <input type="text" id="specialty" name="specialty"><br><br>
+
+        <label>Experience (in years):</label><br>
+        <input type="number" id="experience" name="experience"><br><br>
+
+        <label>Timings:</label><br>
+        <input type="text" id="timings" name="timings"><br><br>
+
+        <label>OPD Charges:</label><br>
+        <input type="number" id="opd_charges" name="opd_charges"><br><br>
+
+        <label>Availability:</label><br>
+        <input type="text" id="availability" name="availability" placeholder="e.g. Mon-Fri 10AM-4PM"><br><br>
+
+        <button type="button" onclick="saveProfile()">Save Profile</button>
+    </form>
+
+    <p id="result"></p>
+
+    <script>
+        const token = localStorage.getItem('doctor_token'); // token stored from login
+
+        async function saveProfile() {
+            const data = {
+                specialty: document.getElementById('specialty').value,
+                experience: document.getElementById('experience').value,
+                timings: document.getElementById('timings').value,
+                opd_charges: document.getElementById('opd_charges').value,
+                availability: document.getElementById('availability').value,
+            };
+
+            const response = await fetch('http://127.0.0.1:8000/doctor-app/api/profile/', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
+                document.getElementById('result').innerText = "✅ Profile updated successfully!";
+            } else {
+                document.getElementById('result').innerText = "❌ Failed to update profile!";
+            }
+        }
+    </script>
+</body>
+</html>

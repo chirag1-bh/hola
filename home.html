@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heal Now - Home</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    /* Navbar */
+    .navbar-brand {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    /* Styled nav links */
+    .navbar .nav-btn {
+      font-weight: 500;
+      padding: 8px 18px;
+      border-radius: 25px;
+      transition: all 0.3s ease-in-out;
+      margin-right: 8px;
+    }
+    .navbar .nav-btn:hover {
+      background-color: #0d6efd;
+      color: white !important;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    /* Hero Section */
+    .hero-section {
+      background: url('https://img.freepik.com/free-photo/portrait-smiling-doctor-with-stethoscope_53419-1035.jpg') no-repeat center center/cover;
+      color: white;
+      padding: 120px 0;
+      text-align: center;
+      position: relative;
+    }
+    .hero-overlay {
+      background: rgba(0,0,0,0.5);
+      position: absolute;
+      inset: 0;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+    .search-box {
+      background: white;
+      border-radius: 12px;
+      padding: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin: 20px auto;
+      max-width: 900px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      position: relative;
+    }
+    .stats {
+      margin-top: 40px;
+      display: flex;
+      justify-content: center;
+      gap: 80px;
+      color: white;
+      font-size: 18px;
+    }
+    .stats div {
+      text-align: center;
+    }
+    .stats span {
+      display: block;
+      font-weight: bold;
+      font-size: 22px;
+    }
+
+    /* Specialization Section */
+    .specialization-section {
+      background: #f8f9fa;
+      padding: 60px 20px;
+      border-radius: 12px;
+      margin: 40px auto;
+    }
+    .specialization-card {
+      background: white;
+      border-radius: 12px;
+      padding: 25px 15px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.2s ease-in-out;
+    }
+    .specialization-card:hover {
+      transform: translateY(-5px);
+    }
+    .specialization-card span {
+      font-size: 40px;
+      display: block;
+      margin-bottom: 15px;
+    }
+    .specialization-card h5 {
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    .specialization-card p {
+      color: #555;
+      font-size: 14px;
+    }
+
+    /* Appointment Form */
+    .appointment-form {
+      background: linear-gradient(to right, #e3f2fd, #ffffff);
+      padding: 50px;
+      border-radius: 12px;
+      margin-top: 50px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+    }
+    .appointment-form h2 {
+      font-weight: bold;
+      color: #0d6efd;
+    }
+    .appointment-form button {
+      width: 100%;
+      font-size: 18px;
+      padding: 12px;
+    }
+
+    /* Footer */
+    footer {
+      background: #0d6efd;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    /* Suggestions dropdown */
+    .suggestions {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: white;
+      border: 1px solid #ccc;
+      width: 100%;
+      max-height: 220px;
+      overflow-y: auto;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      z-index: 2000;
+    }
+    .suggestions li { padding: 8px; cursor: pointer; }
+    .suggestions li:hover { background: #f2f2f2; }
+  </style>
+</head>
+<body>
+
+<!-- ✅ Navbar -->
+<nav class="navbar navbar-expand-lg bg-white shadow-sm py-3">
+  <div class="container">
+    <a class="navbar-brand text-primary" href="#">Heal Now</a>
+    <div class="d-flex flex-grow-1 justify-content-between align-items-center">
+      <div>
+        <a href="/" class="btn nav-btn text-dark">Home</a>
+        <a href="/about" class="btn nav-btn text-dark">About Us</a>
+        <a href="/consult" class="btn nav-btn text-dark">Consult with Doctor</a>
+        <a href="/specializations" class="btn nav-btn text-dark">Specializations</a>
+      </div>
+      <div>
+        <a href="/login" class="btn btn-outline-primary btn-sm me-2">Login</a>
+        <a href="/signup" class="btn btn-primary btn-sm">Sign Up</a>
+        <a href="{% url 'doctor_portal_choice' %}" class="btn btn-primary">Doctor Login</a>
+
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ✅ Second row for Search + City -->
+<div class="bg-light border-top py-2">
+  <div class="container">
+    <form class="d-flex">
+      <input class="form-control me-2" type="search" placeholder="Search doctors, specialties, hospitals...">
+      <select class="form-select">
+        <option>Select City</option>
+        <option>Delhi</option>
+        <option>Mumbai</option>
+        <option>Bangalore</option>
+      </select>
+    </form>
+  </div>
+</div>
+
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="hero-overlay"></div>
+  <div class="container hero-content">
+    <h1 class="fw-bold">Find the Right Doctor,<br><span class="text-success">Anytime, Anywhere</span></h1>
+    <p class="lead">Book appointments with verified doctors across India.<br>Secure, reliable, and convenient healthcare at your fingertips.</p>
+
+    <!-- Search Box -->
+    <div class="search-box">
+      <input id="hospitalSearch" class="form-control" placeholder="Doctor, specialty, or hospital" autocomplete="off">
+      <select id="citySelect" class="form-select">
+        <option value="">Select City</option>
+        <option value="Delhi">Delhi</option>
+        <option value="Mumbai">Mumbai</option>
+        <option value="Bangalore">Bangalore</option>
+      </select>
+      <button class="btn btn-primary">Find Doctors</button>
+      <ul id="hospitalSuggestions" class="suggestions" style="display:none;"></ul>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats">
+      <div>
+        <span>10,000+</span>
+        Verified Doctors
+      </div>
+      <div>
+        <span>1M+</span>
+        Happy Patients
+      </div>
+      <div>
+        <span>24/7</span>
+        Support
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Specialization Section -->
+<section class="container specialization-section">
+  <h2 class="text-center mb-4">Find Doctors by Specialization</h2>
+  <p class="text-center text-muted mb-5">Choose from our wide range of medical specializations</p>
+  <div class="row g-4">
+    <!-- Specialization Cards (same as before, not changing) -->
+    <div class="col-md-3">
+      <a href="/specialization/cardiology/" class="text-decoration-none text-dark">
+        <div class="specialization-card">
+          <span>❤️</span>
+          <h5>Cardiology</h5>
+          <p>Heart and cardiovascular system</p>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a href="/specialization/dermatology/" class="text-decoration-none text-dark">
+        <div class="specialization-card">
+          <span>🧴</span>
+          <h5>Dermatology</h5>
+          <p>Skin, hair, and nail conditions</p>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a href="/specialization/orthopedics/" class="text-decoration-none text-dark">
+        <div class="specialization-card">
+          <span>🦴</span>
+          <h5>Orthopedics</h5>
+          <p>Bones, joints, and muscles</p>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a href="/specialization/pediatrics/" class="text-decoration-none text-dark">
+        <div class="specialization-card">
+          <span>👶</span>
+          <h5>Pediatrics</h5>
+          <p>Children's health and development</p>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a href="/specialization/neurology/" class="text-decoration-none text-dark">
+        <div class="specialization-card">
+          <span>🧠</span>
+          <h5>Neurology</h5>
+          <p>Brain and nervous system</p>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a href="/specialization/gynecology/" class="text-decoration-none text-dark">
+        <div class="specialization-card">
+          <span>👩‍⚕️</span>
+          <h5>Gynecology</h5>
+          <p>Women's reproductive health</p>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a href="/specialization/ophthalmology/" class="text-decoration-none text-dark">
+        <div class="specialization-card">
+          <span>👁️</span>
+          <h5>Ophthalmology</h5>
+          <p>Eye and vision care</p>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a href="/specialization/dentistry/" class="text-decoration-none text-dark">
+        <div class="specialization-card">
+          <span>🦷</span>
+          <h5>Dentistry</h5>
+          <p>Oral and dental health</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Appointment Form -->
+<section class="container appointment-form">
+  <h2 class="text-center mb-4">Book an Appointment</h2>
+  <form method="post" action="/book/" id="appointmentForm">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="patient_name" class="form-label">Patient Name</label>
+      <input type="text" class="form-control" id="patient_name" name="patient_name" required>
+    </div>
+    <div class="mb-3">
+      <label for="specialization" class="form-label">Specialization</label>
+      <select class="form-select" id="specialization" name="specialization" required>
+        <option value="">-- Select Specialization --</option>
+        <option value="cardiology">Cardiology</option>
+        <option value="dermatology">Dermatology</option>
+        <option value="orthopedics">Orthopedics</option>
+        <option value="pediatrics">Pediatrics</option>
+        <option value="neurology">Neurology</option>
+        <option value="gynecology">Gynecology</option>
+        <option value="ophthalmology">Ophthalmology</option>
+        <option value="dentistry">Dentistry</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="doctor" class="form-label">Select Doctor</label>
+      <select class="form-select" id="doctor" name="doctor" required>
+        <option value="">-- Select Doctor --</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="date" class="form-label">Date</label>
+      <input type="date" class="form-control" id="date" name="date" required>
+    </div>
+    <div class="mb-3">
+      <label for="time" class="form-label">Time</label>
+      <input type="time" class="form-control" id="time" name="time" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Book Now</button>
+  </form>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>&copy; 2025 Heal Now. All Rights Reserved.</p>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const endpoint = "{% url 'hospital_autocomplete' %}";
+  const input = document.getElementById("hospitalSearch");
+  const suggestions = document.getElementById("hospitalSuggestions");
+  const citySelect = document.getElementById("citySelect");
+  let timer;
+    
+  input.addEventListener("input", function() {
+    clearTimeout(timer);
+    const q = input.value.trim();
+    const city = citySelect ? citySelect.value : "";
+    if (q.length < 2) { suggestions.style.display = "none"; return; }
+
+    timer = setTimeout(() => {
+      fetch(`${endpoint}?q=${encodeURIComponent(q)}&city=${encodeURIComponent(city)}`)
+        .then(r => r.json())
+        .then(data => {
+          suggestions.innerHTML = "";
+          if (!data.length) { suggestions.style.display = "none"; return; }
+          data.forEach(item => {
+            const li = document.createElement("li");
+            li.textContent = item.name;
+            li.dataset.id = item.id;
+            li.addEventListener("click", () => {
+              input.value = item.name;
+              suggestions.style.display = "none";
+              window.location.href = `/hospital/${item.id}/`;
+            });
+            suggestions.appendChild(li);
+          });
+          suggestions.style.display = "block";
+        })
+        .catch(err => {
+          console.error("Autocomplete error", err);
+          suggestions.style.display = "none";
+        });
+    }, 200);
+  });
+
+  document.addEventListener("click", function(e) {
+    if (!e.target.closest("#hospitalSearch") && !e.target.closest("#hospitalSuggestions")) {
+      suggestions.style.display = "none";
+    }
+  });
+
+  const doctorsBySpecialization = {
+    cardiology: [
+      { id: 1, name: "Dr. Sarah Johnson", experience: "15 years", rating: 4.9 },
+      { id: 2, name: "Dr. Michael Chen", experience: "12 years", rating: 4.8 },
+      { id: 3, name: "Dr. Robert Williams", experience: "20 years", rating: 4.9 }
+    ],
+    dermatology: [
+      { id: 4, name: "Dr. Jennifer Lee", experience: "9 years", rating: 4.8 },
+      { id: 5, name: "Dr. Kevin Brown", experience: "13 years", rating: 4.9 }
+    ],
+    orthopedics: [
+      { id: 6, name: "Dr. Richard Taylor", experience: "16 years", rating: 4.8 },
+      { id: 7, name: "Dr. Maria Garcia", experience: "12 years", rating: 4.7 }
+    ],
+    pediatrics: [
+      { id: 8, name: "Dr. Lisa Anderson", experience: "8 years", rating: 4.9 },
+      { id: 9, name: "Dr. David Miller", experience: "11 years", rating: 4.7 }
+    ],
+    neurology: [
+      { id: 10, name: "Dr. Emily Parker", experience: "10 years", rating: 4.7 },
+      { id: 11, name: "Dr. James Wilson", experience: "14 years", rating: 4.8 }
+    ],
+    gynecology: [
+      { id: 12, name: "Dr. Amanda White", experience: "11 years", rating: 4.9 },
+      { id: 13, name: "Dr. Patricia Harris", experience: "18 years", rating: 4.8 }
+    ],
+    ophthalmology: [
+      { id: 14, name: "Dr. Thomas Clark", experience: "14 years", rating: 4.7 },
+      { id: 15, name: "Dr. Susan Lewis", experience: "10 years", rating: 4.8 }
+    ],
+    dentistry: [
+      { id: 16, name: "Dr. Brian Moore", experience: "12 years", rating: 4.9 },
+      { id: 17, name: "Dr. Nancy Young", experience: "9 years", rating: 4.7 }
+    ]
+  };
+
+  document.getElementById('specialization').addEventListener('change', function() {
+    const specialization = this.value;
+    const doctorSelect = document.getElementById('doctor');
+    doctorSelect.innerHTML = '<option value="">-- Select Doctor --</option>';
+    if (specialization && doctorsBySpecialization[specialization]) {
+      doctorsBySpecialization[specialization].forEach(doctor => {
+        const option = document.createElement('option');
+        option.value = doctor.id;
+        option.textContent = `${doctor.name} (${doctor.experience}, ★ ${doctor.rating})`;
+        doctorSelect.appendChild(option);
+      });
+    }
+  });
+
+  document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const patientName = document.getElementById('patient_name').value;
+    const doctorId = document.getElementById('doctor').value;
+    const appointmentDate = document.getElementById('date').value;
+    const appointmentTime = document.getElementById('time').value;
+    alert(`Thank you, ${patientName}! Your appointment has been booked successfully for ${appointmentDate} at ${appointmentTime}.`);
+    this.reset();
+    document.getElementById('doctor').innerHTML = '<option value="">-- Select Doctor --</option>';
+  });
+
+  // Ensure past dates are disabled
+  const today = new Date().toISOString().split("T")[0];
+  document.getElementById("date").setAttribute("min", today);
+
+  // ✅ Load doctors from doctor.json dynamically
+  fetch("{% static 'doctor.json' %}")
+    .then(response => response.json())
+    .then(data => {
+      const doctorsBySpec = {};
+      data.forEach(doc => {
+        if (!doctorsBySpec[doc.specialization]) doctorsBySpec[doc.specialization] = [];
+        doctorsBySpec[doc.specialization].push(doc);
+      });
+      Object.keys(doctorsBySpecialization).forEach(key => delete doctorsBySpecialization[key]);
+      Object.assign(doctorsBySpecialization, doctorsBySpec);
+    })
+    .catch(err => console.error("Failed to load doctor.json:", err));
+
+});
+</script>
+</body>
+</html>

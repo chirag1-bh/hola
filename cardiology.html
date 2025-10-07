@@ -1,0 +1,40 @@
+{% extends "hospital/base.html" %}
+
+{% block content %}
+  <header class="py-5 text-center">
+    <h2>❤️ Cardiology Specialists</h2>
+    <p class="text-muted">Experts in heart and cardiovascular care</p>
+  </header>
+
+  <div class="container pb-5">
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h4>Dr. Rajesh Sharma</h4>
+            <p><strong>Specialization:</strong> Interventional Cardiologist</p>
+            <p><strong>Experience:</strong> 15 years</p>
+            <p><strong>Availability:</strong> Mon–Fri (10 AM – 2 PM)</p>
+            <p><strong>OPD Cost:</strong> ₹800</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h4>Dr. Neha Verma</h4>
+            <p><strong>Specialization:</strong> Pediatric Cardiologist</p>
+            <p><strong>Experience:</strong> 10 years</p>
+            <p><strong>Availability:</strong> Tue–Sat (4 PM – 7 PM)</p>
+            <p><strong>OPD Cost:</strong> ₹600</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-4 text-center">
+      <a href="{% url 'specializations' %}" class="btn btn-secondary">⬅ Back to Specializations</a>
+    </div>
+  </div>
+{% endblock %}

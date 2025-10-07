@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctor Dashboard - Heal Now</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+    }
+
+    .card {
+      border-radius: 15px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .dashboard-header {
+      background: linear-gradient(to right, #0d6efd, #007bff);
+      color: white;
+      padding: 40px 0;
+      border-radius: 0 0 20px 20px;
+      text-align: center;
+    }
+
+    .dashboard-header h1 {
+      font-weight: 700;
+    }
+
+    .profile-card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+    }
+
+    .section-title {
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: #0d6efd;
+    }
+
+    .appointment-table th {
+      background-color: #0d6efd;
+      color: white;
+    }
+
+    .btn-primary {
+      background-color: #0d6efd;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #0b5ed7;
+    }
+
+    .logout-btn {
+      background: #dc3545;
+      color: white;
+    }
+
+    .logout-btn:hover {
+      background: #b02a37;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container">
+      <a class="navbar-brand text-primary" href="/">Heal Now</a>
+      <div class="ms-auto">
+        <a href="/doctor/profile/" class="btn btn-outline-primary btn-sm me-2">Profile</a>
+        <a href="/logout" class="btn logout-btn btn-sm">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Dashboard Header -->
+  <div class="dashboard-header">
+    <h1>Welcome, Dr. {{ doctor.name }}</h1>
+    <p>{{ doctor.specialization }} | {{ doctor.experience }} years of experience</p>
+  </div>
+
+  <!-- Dashboard Content -->
+  <div class="container mt-5 mb-5">
+
+    <div class="row g-4">
+      <!-- Profile Card -->
+      <div class="col-md-4">
+        <div class="card profile-card text-center p-4">
+          <img src="{% if doctor.image %}{{ doctor.image.url }}{% else %}{% static 'images/default_doctor.png' %}{% endif %}" alt="Doctor Profile">
+          <h4>Dr. {{ doctor.name }}</h4>
+          <p class="text-muted">{{ doctor.specialization }}</p>
+          <p><strong>Contact:</strong> {{ doctor.email }}</p>
+          <p><strong>Hospital:</strong> {{ doctor.hospital_name }}</p>
+          <p><strong>Availability:</strong> {{ doctor.availability|default:"Not Set" }}</p>
+          <a href="/doctor/profile/edit/" class="btn btn-primary mt-2 w-100">Edit Profile</a>
+        </div>
+      </div>
+
+      <!-- Appointments -->
+      <div class="col-md-8">
+        <div class="card p-4">
+          <h5 class="section-title">Today's Appointments</h5>
+          {% if appointments %}
+          <div class="table-responsive">
+            <table class="table table-striped appointment-table align-middle">
+              <thead>
+                <tr>
+                  <th>Patient</th>
+                  <th>Time</th>
+                  <th>Reason</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for appointment in appointments %}
+                <tr>
+                  <td>{{ appointment.patient_name }}</td>
+                  <td>{{ appointment.time }}</td>
+                  <td>{{ appointment.reason }}</td>
+                  <td>
+                    {% if appointment.status == 'Pending' %}
+                    <span class="badge bg-warning text-dark">Pending</span>
+                    {% elif appointment.status == 'Completed' %}
+                    <span class="badge bg-success">Completed</span>
+                    {% else %}
+                    <span class="badge bg-secondary">Cancelled</span>
+                    {% endif %}
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          {% else %}
+          <p class="text-muted">No appointments scheduled for today.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Patient History -->
+    <div class="card mt-4 p-4">
+      <h5 class="section-title">Recent Patients</h5>
+      {% if recent_patients %}
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead>
+            <tr>
+              <th>Patient Name</th>
+              <th>Date</th>
+              <th>Diagnosis</th>
+              <th>Prescription</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for patient in recent_patients %}
+            <tr>
+              <td>{{ patient.name }}</td>
+              <td>{{ patient.date }}</td>
+              <td>{{ patient.diagnosis }}</td>
+              <td>{{ patient.prescription }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <p class="text-muted">No recent consultations found.</p>
+      {% endif %}
+    </div>
+
+  </div>
+
+  <footer class="text-center py-3 bg-primary text-white mt-5">
+    &copy; 2025 Heal Now. All Rights Reserved.
+  </footer>
+
+</body>
+</html>

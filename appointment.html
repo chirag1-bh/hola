@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block content %}
+
+  <!-- Hero -->
+  <section class="hero text-center py-5">
+    <h1 class="text-primary fw-bold">Book Your Appointment Easily</h1>
+    <p class="text-muted">Fast, hassle-free and secure booking for you and your family</p>
+  </section>
+
+  <!-- Appointment Form -->
+  <div class="appointment-card mx-auto mb-5 p-4 bg-white shadow rounded" style="max-width:650px;">
+    <h4 class="text-center mb-4">Appointment Form</h4>
+    <form method="POST">
+      {% csrf_token %}
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-control" placeholder="John Doe" name="name" required>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Mobile</label>
+          <input type="tel" class="form-control" placeholder="+91 9876543210" name="mobile" required>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" placeholder="you@example.com" name="email" required>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Department</label>
+          <select class="form-select" name="department" required>
+            <option value="">Select</option>
+            <option>Cardiology</option>
+            <option>Neurology</option>
+            <option>Orthopedics</option>
+            <option>Pediatrics</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Preferred Date</label>
+          <input type="date" class="form-control" name="date" required>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Time Slot</label>
+          <select class="form-select" name="time" required>
+            <option value="">Select</option>
+            <option>Morning (9 AM - 12 PM)</option>
+            <option>Afternoon (12 PM - 4 PM)</option>
+            <option>Evening (4 PM - 8 PM)</option>
+          </select>
+        </div>
+      </div>
+      <div class="mt-3">
+        <label class="form-label">Message (Optional)</label>
+        <textarea class="form-control" rows="3" placeholder="Any additional info..." name="message"></textarea>
+      </div>
+      <button class="btn btn-primary w-100 mt-4">Book Appointment</button>
+    </form>
+  </div>
+
+  <!-- Info Section -->
+  <div class="container my-5">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="info-box p-3 bg-white shadow rounded text-center">
+          <h5 class="text-primary">Fast Confirmation</h5>
+          <p>Get instant updates and booking confirmations directly on your mobile.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="info-box p-3 bg-white shadow rounded text-center">
+          <h5 class="text-primary">Trusted Doctors</h5>
+          <p>Book only with verified and experienced doctors across specialties.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="info-box p-3 bg-white shadow rounded text-center">
+          <h5 class="text-primary">24/7 Support</h5>
+          <p>Need help? Our support team is available round the clock for you.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+

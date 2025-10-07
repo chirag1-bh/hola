@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5">
+  <h2 class="text-center mb-4">Find Doctors by Specialization</h2>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+    <div class="col">
+      <div class="card h-100 shadow-sm text-center">
+        <div class="card-body">
+          <h3>❤️ Cardiology</h3>
+          <p>Heart and cardiovascular system</p>
+          <a href="{% url 'cardiology' %}" class="btn btn-primary">View Doctors</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card h-100 shadow-sm text-center">
+        <div class="card-body">
+          <h3>🧴 Dermatology</h3>
+          <p>Skin, hair, and nail conditions</p>
+          <a href="{% url 'dermatology' %}" class="btn btn-primary">View Doctors</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card h-100 shadow-sm text-center">
+        <div class="card-body">
+          <h3>🦴 Orthopedics</h3>
+          <p>Bones, joints, and muscles</p>
+          <a href="{% url 'orthopedics' %}" class="btn btn-primary">View Doctors</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card h-100 shadow-sm text-center">
+        <div class="card-body">
+          <h3>👶 Pediatrics</h3>
+          <p>Children's health and development</p>
+          <a href="{% url 'pediatrics' %}" class="btn btn-primary">View Doctors</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card h-100 shadow-sm text-center">
+        <div class="card-body">
+          <h3>🧠 Neurology</h3>
+          <p>Brain and nervous system</p>
+          <a href="{% url 'neurology' %}" class="btn btn-primary">View Doctors</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card h-100 shadow-sm text-center">
+        <div class="card-body">
+          <h3>👩‍⚕️ Gynecology</h3>
+          <p>Women's reproductive health</p>
+          <a href="{% url 'gynecology' %}" class="btn btn-primary">View Doctors</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card h-100 shadow-sm text-center">
+        <div class="card-body">
+          <h3>👁️ Ophthalmology</h3>
+          <p>Eye and vision care</p>
+          <a href="{% url 'ophthalmology' %}" class="btn btn-primary">View Doctors</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card h-100 shadow-sm text-center">
+        <div class="card-body">
+          <h3>🦷 Dentistry</h3>
+          <p>Oral and dental health</p>
+          <a href="{% url 'dentistry' %}" class="btn btn-primary">View Doctors</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

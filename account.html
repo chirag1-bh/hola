@@ -1,0 +1,16 @@
+{% extends "hospital/base.html" %}
+
+{% block content %}
+<div class="container py-5">
+  <h2 class="mb-4">👤 My Account</h2>
+
+  <div class="card shadow-sm p-4">
+    <h5>Welcome, {{ user.username }}!</h5>
+    <p>Email: {{ user.email }}</p>
+
+    <hr>
+    <a href="{% url 'appointments' %}" class="btn btn-primary">📅 View My Appointments</a>
+    <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+  </div>
+</div>
+{% endblock %}
